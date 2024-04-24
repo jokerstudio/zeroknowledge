@@ -322,8 +322,8 @@ print("Pairing check passed!")
 with open("Verifier.sol.template", "r") as f:
     template = Template(f.read())
     variables = {
-        "aG1_x": normalize(A_G1)[0],
-        "aG1_y": normalize(A_G1)[1],
+        "aG1_x": normalize(neg(A_G1))[0],
+        "aG1_y": normalize(neg(A_G1))[1],
         "bG2_x1": normalize(B_G2)[0].coeffs[0],
         "bG2_x2": normalize(B_G2)[0].coeffs[1],
         "bG2_y1": normalize(B_G2)[1].coeffs[0],
