@@ -2,6 +2,7 @@ import galois
 import numpy as np
 from py_ecc.optimized_bn128 import multiply, G1, G2, add, pairing, neg, normalize, eq, curve_order, final_exponentiate
 from py_ecc.fields import optimized_bn128_FQ12 as FQ12
+from py_ecc.utils import prime_field_inv
 from string import Template
 poly1d = np.poly1d
 
@@ -335,14 +336,16 @@ print(f"[K/γ]G1 = {[normalize(point) for point in K_gamma_G1]}")
 ## Solution 2: Multiplicative Inverse Construction
 # n = 7
 # A_G1 = multiply(A_G1, n)
-# B_G2 = multiply(B_G2, pow(n, -1, curve_order))
+# B_G2 = multiply(B_G2, prime_field_inv(n, curve_order))
 
 ## Solution 3: Merged Construction
-r1 = FP.Random()
-r2 = FP.Random()
+r1 = int(FP.Random())
+r2 = int(FP.Random())
+print(r1)
+print(r2)
 B_G2 = add(multiply(B_G2, r1), multiply(delta_G2, r1 * r2))
 C_G1 = add(C_G1, multiply(A_G1, r2))
-A_G1 = multiply(A_G1, pow(r1, -1, curve_order))
+A_G1 = multiply(A_G1, prime_field_inv(r1, curve_order))
 
 
 
