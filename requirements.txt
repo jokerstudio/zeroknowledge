@@ -1,0 +1,13 @@
+# Core dependencies for Zero-Knowledge Proof implementations
+numpy==2.4.6
+sympy==1.14.0
+galois==0.4.11
+matplotlib==3.10.9
+
+# Jupyter notebook support (optional, for running .ipynb files)
+jupyter==1.1.1
+notebook==7.3.3
+
+# Merkle tree implementation
+# Note: This may be provided locally as merkle.py in the project
+# merkle==0.1.3

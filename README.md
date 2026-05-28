@@ -10,6 +10,37 @@ This project requires Python 3.7+ and Jupyter Notebook/Lab.
 
 ### Installation
 
+#### Option 1: Using Dev Container (Recommended)
+
+The easiest way to get started with a consistent development environment and **automatic port forwarding**.
+
+**Prerequisites:**
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) installed and running
+- VS Code or Cursor IDE with the ["Dev Containers"](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension
+
+**Steps:**
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd zeroknowledge
+```
+
+2. Open the project in VS Code/Cursor:
+```bash
+code .  # For VS Code
+# or
+cursor . # For Cursor IDE
+```
+
+3. When prompted, click **"Reopen in Container"**, or manually:
+   - Press `Cmd/Ctrl + Shift + P`
+   - Select **"Dev Containers: Reopen in Container"**
+
+4. Wait for the container to build (first time only)
+
+#### Option 2: Local Installation
+
 1. Clone the repository:
 ```bash
 git clone <repository-url>
@@ -24,13 +55,17 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 3. Install dependencies:
 ```bash
-pip install numpy sympy galois matplotlib jupyter
-```
-
-Or if a `requirements.txt` file is available:
-```bash
 pip install -r requirements.txt
 ```
+
+**Locked Dependencies (see `requirements.txt`):**
+- numpy==2.4.6
+- sympy==1.14.0
+- galois==0.4.11
+- matplotlib==3.10.9
+- jupyter==1.1.1
+- notebook==7.3.3
+- merkle (custom module included in this repository as `merkle.py`)
 
 ### Running the Notebooks
 
@@ -47,13 +82,6 @@ To run:
 jupyter notebook zkSTARK.ipynb
 ```
 
-**Dependencies:**
-- numpy (v1.21.5 or compatible)
-- sympy (v1.10.1 or compatible)
-- galois
-- matplotlib (v3.5.1 or compatible)
-- merkle (custom module included in this repository)
-
 #### circleSTARK.ipynb
 
 This notebook implements Circle STARK, a variant of the standard STARK proof system that uses the circle group over a prime field instead of a multiplicative subgroup. It demonstrates:
@@ -66,13 +94,15 @@ To run:
 jupyter notebook circleSTARK.ipynb
 ```
 
-**Dependencies:**
-- numpy
-- matplotlib
-- merkle (custom module included in this repository)
+### Running Jupyter in Dev Container
 
-### Notes
+If using the Dev Container, Jupyter is already configured. You can:
 
-- Both notebooks use the `merkle.py` module for Merkle tree implementation (based on StarkWare's implementation)
-- Make sure all dependencies are installed before running the notebooks
-- The notebooks include detailed explanations and can be run cell-by-cell for better understanding
+1. **Open notebooks directly in VS Code/Cursor**: 
+   - Simply click on any `.ipynb` file, and it will open with Jupyter support
+
+2. **Start Jupyter Notebook server**:
+   ```bash
+   jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser
+   ```
+   The port 8888 is automatically forwarded, so you can access it at `http://localhost:8888`
